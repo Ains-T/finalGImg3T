@@ -68,7 +68,10 @@ public class ImageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_img, container, false);
+
+        //gọi để set menu trên fragment
         setHasOptionsMenu(true);
+
         gridView = (GridView) view.findViewById(R.id.fragment_img_gv_item);
 
         int iDisplayWidth = getResources().getDisplayMetrics().widthPixels;
@@ -88,6 +91,7 @@ public class ImageFragment extends Fragment {
         return view;
     }
 
+    //tạo menu với button sắp xếp và chuyển sang camera
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.mains_action, menu);
@@ -97,7 +101,6 @@ public class ImageFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.mains_action_sort:
-                // search action
                 reorder();
                 return true;
             case R.id.mains_action_camera:
@@ -108,7 +111,7 @@ public class ImageFragment extends Fragment {
         }
     }
 
-
+    //sắp xếp
     private void reorder() {
         //  Collections.sort(albumList, new MapComparator(Function.KEY_ALBUM, "dsc"));
         //  adapter.notifyDataSetChanged();
@@ -139,7 +142,9 @@ public class ImageFragment extends Fragment {
                         Collections.sort(imageList, new MapComparator(Function.KEY_TIMESTAMP, order));
                         break;
                     case R.id.reoder_dialog_name:
-                        Collections.sort(imageList, new MapComparator(Function.KEY_ALBUM, order));
+                        String name = Function.KEY_PATH;
+                        name = name.substring(name.lastIndexOf("/") + 1);
+                        Collections.sort(imageList, new MapComparator(name, order));
                         break;
                     case R.id.reoder_dialog_path:
                         Collections.sort(imageList, new MapComparator(Function.KEY_PATH, order));
@@ -154,7 +159,9 @@ public class ImageFragment extends Fragment {
 
         dialog.show();
     }
+    //-------------------------------------------------
 
+    //camera
     private void cameraFunction(){
         Dexter.withActivity(getActivity())
                 .withPermission(Manifest.permission.CAMERA)
@@ -239,7 +246,9 @@ public class ImageFragment extends Fragment {
             return false;
         }
     }
+    //------------------------------------------
 
+    //hiển thị tát cả ảnh trong tát cả album
     class LoadAll extends AsyncTask<String, Void, String>{
         @Override
         protected void onPreExecute() {
@@ -327,6 +336,8 @@ public class ImageFragment extends Fragment {
         }
     }
 
+
+    //hiển thị ảnh ra từ class LoatAll
     @Override
     public void onResume() {
         super.onResume();

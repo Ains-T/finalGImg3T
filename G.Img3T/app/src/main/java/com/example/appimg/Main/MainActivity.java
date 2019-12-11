@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import com.example.appimg.Albumfragment.AlbumFragment;
 import com.example.appimg.ImagesFragment.ImageFragment;
 import com.example.appimg.R;
+import com.example.appimg.TimeLineFragment.TimeLineFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageFragment imgFragment;
     private AlbumFragment albumFragment;
+    private TimeLineFragment timeLineFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         imgFragment = new ImageFragment();
         albumFragment = new AlbumFragment();
+        timeLineFragment = new TimeLineFragment();
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setLogo(R.drawable.ic_img_toolbar);
@@ -69,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         actionBar.setLogo(R.drawable.ic_time_toolbar);
                         actionBar.setDisplayUseLogoEnabled(true);
                         setTitle(" TimeLine");
+                        setFragment(timeLineFragment);
                         return true;
 
                     default:

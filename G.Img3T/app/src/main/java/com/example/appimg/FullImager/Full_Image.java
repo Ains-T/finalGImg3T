@@ -73,6 +73,9 @@ public class Full_Image extends AppCompatActivity  implements ViewPager.OnPageCh
 
         //set title và nút trở về trang chính
         title = title.substring(title.lastIndexOf("/") + 1);
+        if (title.length() > 15) {
+            title = title.substring(0, 15).concat("...");
+        }
         setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -100,6 +103,7 @@ public class Full_Image extends AppCompatActivity  implements ViewPager.OnPageCh
         }
     }
 
+    //click để ẩn toolbar và bottombar
     void setToolbarView() {
         if (mToolbarVisibility) {
             getSupportActionBar().hide();
@@ -117,6 +121,7 @@ public class Full_Image extends AppCompatActivity  implements ViewPager.OnPageCh
 
     }
 
+    //set menu thêm buttom xem thông tin
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -184,6 +189,7 @@ public class Full_Image extends AppCompatActivity  implements ViewPager.OnPageCh
         dialog.show();
 
     }
+    //--------------------------------
 
     //bottombar
     private void setBottomBar(){
@@ -203,7 +209,9 @@ public class Full_Image extends AppCompatActivity  implements ViewPager.OnPageCh
             }
         });
     }
+    //--------------------------------
 
+    //sự kiện cắt ảnh
     private void cropFuntion() {
         String path = imageList.get(+viewPager.getCurrentItem()).get(Function.KEY_PATH);
         Uri inputUri = Uri.fromFile(new File(path));
@@ -266,6 +274,10 @@ public class Full_Image extends AppCompatActivity  implements ViewPager.OnPageCh
         }
     }
 
+    //kết thúc sự kiện cắt ảnh
+    //------------------------------------
+
+    //set sự kiện xoá ảnh
     private void deleteDialog(){
         DialogInterface.OnClickListener dialogClick = new DialogInterface.OnClickListener() {
             @Override
@@ -313,6 +325,7 @@ public class Full_Image extends AppCompatActivity  implements ViewPager.OnPageCh
             Toast.makeText(this, "File not found", Toast.LENGTH_SHORT).show();
         }
     }
+    //kết thúc sự kiện xoá ảnh
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

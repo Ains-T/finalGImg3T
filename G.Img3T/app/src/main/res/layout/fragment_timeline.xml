@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center">
 
-    <ListView
+    <TextView
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingBottom="5dp">
-    </ListView>
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:text="SẼ CÓ TRONG BẢN CẬP NHẬT SAU~"
+        android:layout_marginBottom="8dp"/>
+
+
+    <TextView
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#2B7A12"
+        android:text="CÁM ƠN THẦY VÀ CÁC BẠN ĐÃ XEM QUA SẢN PHẨM CỦA NHÓM MÌNH!!!">
+
+    </TextView>
 </LinearLayout>
