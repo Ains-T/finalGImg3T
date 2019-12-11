@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">AppImg</string>
+
+    //main
+    <string name="tv_img"> THƯ VIỆN ẢNH </string>
+    //bar
+    <string name="title_img"> Ảnh </string>
+    <string name="title_album"> Album </string>
+    <string name="title_time"> Time Line </string>
+    //search
+    <string name="search"> Tìm kiếm </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

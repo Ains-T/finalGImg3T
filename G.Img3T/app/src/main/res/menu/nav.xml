@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_img"
+        android:icon="@drawable/ic_img"
+        android:title="@string/title_img" />
+
+    <item
+        android:id="@+id/nav_album"
+        android:icon="@drawable/ic_fol_img"
+        android:title="@string/title_album" />
+
+    <item
+        android:id="@+id/nav_time"
+        android:icon="@drawable/ic_time"
+        android:title="@string/title_time" />
+</menu>
