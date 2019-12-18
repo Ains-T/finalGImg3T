@@ -1,28 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
-
-    <TextView
-        android:gravity="center"
+    android:background="#000">
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:textColor="#000"
-        android:text="SẼ CÓ TRONG BẢN CẬP NHẬT SAU~"
-        android:layout_marginBottom="8dp"/>
-
-
-    <TextView
-        android:gravity="center"
+        android:layout_height="match_parent">
+    <ViewFlipper
+        android:id="@+id/fragment_timeline_vf_time"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="#2B7A12"
-        android:text="CÁM ƠN THẦY VÀ CÁC BẠN ĐÃ XEM QUA SẢN PHẨM CỦA NHÓM MÌNH!!!">
+        android:layout_height="300dp">
+    </ViewFlipper>
 
-    </TextView>
-</LinearLayout>
+    <GridView
+        android:id="@+id/fragment_timeline_gv_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnWidth="172dp"
+        android:gravity="center"
+        android:horizontalSpacing="5dp"
+        android:numColumns="2"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="5dp"></GridView>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:visibility="visible"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:id="@+id/fragment_timeline_tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:shadowColor="#3E1883"
+                android:shadowRadius="10.0"
+
+
+                android:text="Dòng thời gian ảnh"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:maxLines="1"
+                android:layout_marginLeft="5dp"
+                android:scrollHorizontally="true"
+                android:ellipsize="end"/>
+            <TextView
+                android:id="@+id/fragment_timeline_tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:shadowColor="#000"
+                android:textStyle="italic"
+                android:layout_marginLeft="5dp"
+                android:shadowRadius="7.0"
+                android:text="Time"
+                android:textColor="#ffffff"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:ellipsize="end"/>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

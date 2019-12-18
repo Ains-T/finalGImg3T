@@ -1,6 +1,7 @@
 package com.example.appimg.Albumfragment;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -187,6 +188,46 @@ public class AlbumFragment extends Fragment {
         } else {
             // no camera on this device
             return false;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CAPTURE_IMAGE) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                deleteFile();
+            } else {
+                galleryAddPic();
+            }
+        }
+        if (requestCode == REQUEST_PICK_IMAGE) {
+            if (resultCode == Activity.RESULT_OK) {
+                Intent intentResult = new Intent();
+                intentResult.setData(data.getData());
+                getActivity().setResult(Activity.RESULT_OK,intentResult);
+                getActivity().finish();
+            }
+        }
+
+    }
+
+    private void galleryAddPic() {
+        try {
+            Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            File f = new File(imageFilePath);
+            Uri contentUri = Uri.fromFile(f);
+            mediaScanIntent.setData(contentUri);
+            getContext().sendBroadcast(mediaScanIntent);
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void deleteFile() {
+        try {
+            File file = new File(imageFilePath);
+            boolean deleted = file.delete();
+        } catch (Exception e) {
         }
     }
     // hết sự kiện camera

@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.method.Touch;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -33,7 +34,9 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import com.example.appimg.FullImager.Full_Image;
+import com.example.appimg.Main.MainActivity;
 import com.example.appimg.R;
+import com.example.appimg.TimeLineFragment.TimeLineFragment;
 import com.example.appimg.Utils.Function;
 import com.example.appimg.Utils.MapComparator;
 import com.karumi.dexter.Dexter;
@@ -56,6 +59,7 @@ public class ImageFragment extends Fragment {
 
     static final int REQUEST_PERMISSION_KEY = 1;
     private static final int REQUEST_CAPTURE_IMAGE = 100;
+    private static final int REQUEST_PICK_IMAGE = 200;
     LoadAll loadAlltasks;
     ArrayList<HashMap<String, String>> listfiles = new ArrayList<HashMap<String, String>>();
     ArrayList<HashMap<String, String>> imageList = new ArrayList<HashMap<String, String>>();
@@ -63,6 +67,7 @@ public class ImageFragment extends Fragment {
     GridView gridView;
     boolean pickintent = false;
     String imageFilePath;
+
 
     @Nullable
     @Override
@@ -88,6 +93,7 @@ public class ImageFragment extends Fragment {
         if(!Function.hasPermissions(getContext(), PERMISSIONS)){
             ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, REQUEST_PERMISSION_KEY);
         }
+
         return view;
     }
 
@@ -246,6 +252,46 @@ public class ImageFragment extends Fragment {
             return false;
         }
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CAPTURE_IMAGE) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                deleteFile();
+            } else {
+                galleryAddPic();
+            }
+        }
+        if (requestCode == REQUEST_PICK_IMAGE) {
+            if (resultCode == Activity.RESULT_OK) {
+                Intent intentResult = new Intent();
+                intentResult.setData(data.getData());
+                getActivity().setResult(Activity.RESULT_OK,intentResult);
+                getActivity().finish();
+            }
+        }
+
+    }
+
+    private void galleryAddPic() {
+        try {
+            Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            File f = new File(imageFilePath);
+            Uri contentUri = Uri.fromFile(f);
+            mediaScanIntent.setData(contentUri);
+            getContext().sendBroadcast(mediaScanIntent);
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void deleteFile() {
+        try {
+            File file = new File(imageFilePath);
+            boolean deleted = file.delete();
+        } catch (Exception e) {
+        }
+    }
     //------------------------------------------
 
     //hiển thị tát cả ảnh trong tát cả album
@@ -316,11 +362,16 @@ public class ImageFragment extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     if(!pickintent){
                         Intent intent = new Intent(getContext(), Full_Image.class);
-                        Bundle bundle = new Bundle();
+
+
                         String imgPath = imageList.get(+position).get(Function.KEY_PATH);
                         intent.putExtra("title", imgPath);
+
+                        Bundle bundle = new Bundle();
                         bundle.putSerializable("list",imageList);
                         intent.putExtras(bundle);
+
+
                         intent.putExtra("position",position);
                         startActivity(intent);
                     }else{

@@ -29,6 +29,8 @@ import androidx.core.content.FileProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.appimg.R;
+
+import com.example.appimg.TimeLineFragment.TimeLineFragment;
 import com.example.appimg.Utils.Function;
 import com.soundcloud.android.crop.Crop;
 
@@ -50,7 +52,7 @@ public class Full_Image extends AppCompatActivity  implements ViewPager.OnPageCh
     boolean mToolbarVisibility = true;
     ImageButton ib_crop, ib_delete;
     String imageFilePath;
-
+    private TimeLineFragment timeLineFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +70,13 @@ public class Full_Image extends AppCompatActivity  implements ViewPager.OnPageCh
 
         //kết nối dữ liệu hiển thị ảnh sau khi chọn ảnh cân xem
         imageList = (ArrayList<HashMap<String, String>>) i.getExtras().getSerializable("list");
+        //truyền dữ liệu
+//        Bundle bundle = new Bundle();
+//        bundle.putString("name", "this is a conga");
+//        //
+//        timeLineFragment = new TimeLineFragment();
+//        timeLineFragment.setArguments(bundle);
+
         adapter = new FullImageAdapter(imageList, Full_Image.this);
         viewPager.setAdapter(adapter);
 

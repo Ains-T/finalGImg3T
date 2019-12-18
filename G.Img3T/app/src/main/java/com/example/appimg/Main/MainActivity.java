@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.appimg.Albumfragment.AlbumFragment;
 import com.example.appimg.ImagesFragment.ImageFragment;
@@ -16,6 +18,9 @@ import com.example.appimg.R;
 import com.example.appimg.TimeLineFragment.TimeLineFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageFragment imgFragment;
     private AlbumFragment albumFragment;
     private TimeLineFragment timeLineFragment;
+
+    ArrayList<HashMap<String, String>> imageList = new ArrayList<HashMap<String, String>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,16 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayUseLogoEnabled(true);
         setTitle(" Ảnh");
         setFragment(imgFragment);
+
+        //imageList = (ArrayList<HashMap<String, String>>) i.getExtras().getSerializable("list");
+
+
+//        Bundle bundle = new Bundle();
+//        bundle.putString("name", "this is a conga");
+//        //
+//        timeLineFragment = new TimeLineFragment();
+//        timeLineFragment.setArguments(bundle);
+
 
         mainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
